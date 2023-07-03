@@ -113,7 +113,7 @@ class PrivateUserApiTests(TestCase):
     """Test API requests that require authentication."""
 
     def setUp(self):
-        self.user = create_user(
+        self.user = get_user_model().objects.create_user(
             email='test@example.com',
             password='testpass123',
             name='Test Name',
@@ -127,7 +127,7 @@ class PrivateUserApiTests(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, {
-            'name':self.user.name,
+            'name': self.user.name,
             'email': self.user.email,
         })
 
